@@ -14,7 +14,6 @@ var app = chooViewApp.createApp((state, prev, send) => html`
     <input oninput=${ (e)=>send('change', e.target.value,()=>{}) } />
   </div>
 `);
-
 app.model({
   state:{ title:'view app' },
   reducers:{
@@ -26,6 +25,8 @@ app.model({
 
 chooViewApp.mount(app.start(), '#chooApp');
 ```
+
+After start the app you can call ```app.send```  order to call actions
 
 ## Multiple Views
 

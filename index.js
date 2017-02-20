@@ -24,7 +24,7 @@ exports.createApp = (view) => {
     },
     subscriptions:{
       init(send,done){
-        app.send = send;
+        app.send = (action,data,cb=()=>{})=>send(action,data,cb);
 
         if(view instanceof Array){
           app.childs = view.map(childView=>that.createSubApp(childView, app, send));

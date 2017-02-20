@@ -11,7 +11,7 @@ var chooViewApp = require('choo-view-app');
 var app = chooViewApp.createApp((state, prev, send) => html`
   <div>
     ${state.title}
-    <input oninput=${ (e)=>send('change', e.target.value,()=>{}) } />
+    <input oninput=${(e)=>send('change', e.target.value,()=>{})} />
   </div>
 `);
 app.model({
@@ -41,7 +41,7 @@ var view = (state, prev, send) => html`
     </h3>
 
     ${state.title}
-    <input oninput=${ (e)=>send('change', e.target.value,()=>{}) } />
+    <input oninput=${(e)=>send('change', e.target.value,()=>{})} />
   </div>
 `
 

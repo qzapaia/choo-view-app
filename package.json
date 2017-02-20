@@ -1,10 +1,10 @@
 {
   "name": "choo-view-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create choo single-view app (widget). Create choo apps with child apps.",
   "main": "index.js",
   "keywords": [
-     "choo"
+    "choo"
   ],
   "repository": {
     "type": "git",

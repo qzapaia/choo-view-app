@@ -1,0 +1,22 @@
+{
+  "name": "choo-view-app",
+  "version": "0.0.1",
+  "description": "Create choo single-view app \"widget\". Create choo apps with child apps.",
+  "main": "index.js",
+  "keywords": [
+     "choo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qzapaia/choo-view-app.git"
+  },
+  "author": "qzapaia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qzapaia/choo-view-app/issues"
+  },
+  "homepage": "https://github.com/qzapaia/choo-view-app#readme",
+  "peerDependencies": {
+    "choo": "4.x"
+  }
+}

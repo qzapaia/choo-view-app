@@ -14,6 +14,7 @@ var app = chooViewApp.createApp((state, prev, send) => html`
     <input oninput=${(e)=>send('change', e.target.value,()=>{})} />
   </div>
 `);
+
 app.model({
   state:{ title:'view app' },
   reducers:{
@@ -45,6 +46,7 @@ var view = (state, prev, send) => html`
   </div>
 `
 
+// it could be an array also
 var parentApp = chooViewApp.createApp({
   subAppOne:view,
   subAppTwo:view
@@ -59,9 +61,9 @@ parentApp.model({
   }
 });
 
-// must start parent app in order to have childs available
 chooViewApp.mount(parentApp.start(),'.parentApp');
 
+// must start parent app in order to have childs available
 chooViewApp.mount(parentApp.childs.subAppOne.start(),'.childOneApp');
 chooViewApp.mount(parentApp.childs.subAppTwo.start(),'.childTwoApp');
 ```

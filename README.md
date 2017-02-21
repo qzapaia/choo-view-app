@@ -31,7 +31,7 @@ app.model({
 chooViewApp.mount(app.start(), '#chooApp');
 ```
 
-After start the app you can call ```app.send```  order to call actions
+After start the app you can use ```app.send``` to call actions.
 
 ## Multiple Views
 
@@ -46,7 +46,7 @@ const view = (state, prev, send) => html`
   </div>
 `
 
-// it could be an array also
+// it could be an array also.
 const parentApp = chooViewApp.createApp({
   subAppOne:view,
   subAppTwo:view
@@ -65,7 +65,7 @@ parentApp.model({
 
 chooViewApp.mount(parentApp.start(),'#parentApp');
 
-// must start parent app in order to have childs available
+// must start parent app in order to have childs available.
 chooViewApp.mount(parentApp.childs.subAppOne.start(),'#childOneApp');
 chooViewApp.mount(parentApp.childs.subAppTwo.start(),'#childTwoApp');
 ```

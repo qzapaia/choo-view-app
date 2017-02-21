@@ -7,7 +7,7 @@
     "choo"
   ],
   "scripts": {
-    "publish": "./node_modules/.bin/babel src -d dist && npm version patch"
+    "prepublish": "./node_modules/.bin/babel src -d dist && npm version patch"
   },
   "repository": {
     "type": "git",

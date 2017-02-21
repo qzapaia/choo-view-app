@@ -41,10 +41,6 @@ const chooViewApp = require('choo-view-app');
 
 const view = (state, prev, send) => html`
   <div>
-    <h3>
-    model: ${JSON.stringify(state)}
-    </h3>
-
     ${state.title}
     <input oninput=${(e)=>send('change', e.target.value)} />
   </div>

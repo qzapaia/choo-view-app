@@ -11,15 +11,15 @@ const chooViewApp = require('choo-view-app');
 const view = (state, prev, send) => html`
   <div>
     ${state.title}
-    <input oninput=${(e)=>send('change', e.target.value,()=>{})} />
+    <input oninput=${(e)=>send('change', e.target.value)} />
   </div>
 `;
 
 const app = chooViewApp.createApp(view);
 
 app.model({
-  state:{ 
-    title:'view app' 
+  state:{
+    title:'view app'
   },
   reducers:{
     change(state, data){
@@ -46,7 +46,7 @@ const view = (state, prev, send) => html`
     </h3>
 
     ${state.title}
-    <input oninput=${(e)=>send('change', e.target.value,()=>{})} />
+    <input oninput=${(e)=>send('change', e.target.value)} />
   </div>
 `
 
@@ -57,8 +57,8 @@ const parentApp = chooViewApp.createApp({
 });
 
 parentApp.model({
-  state:{ 
-    title:'parentApp' 
+  state:{
+    title:'parentApp'
   },
   reducers:{
     change(state,data){

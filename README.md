@@ -5,18 +5,22 @@ Create choo single-view app (widget). Create choo apps with child apps.
 ## Single view app
 
 ```js
-var html = require('choo/html');
-var chooViewApp = require('choo-view-app');
+const html = require('choo/html');
+const chooViewApp = require('choo-view-app');
 
-var app = chooViewApp.createApp((state, prev, send) => html`
+const view = (state, prev, send) => html`
   <div>
     ${state.title}
     <input oninput=${(e)=>send('change', e.target.value,()=>{})} />
   </div>
-`);
+`;
+
+const app = chooViewApp.createApp(view);
 
 app.model({
-  state:{ title:'view app' },
+  state:{ 
+    title:'view app' 
+  },
   reducers:{
     change(state, data){
       return { title:data }
@@ -32,10 +36,10 @@ After start the app you can call ```app.send```  order to call actions
 ## Multiple Views
 
 ```js
-var html = require('choo/html')
-var chooViewApp = require('choo-view-app');
+const html = require('choo/html')
+const chooViewApp = require('choo-view-app');
 
-var view = (state, prev, send) => html`
+const view = (state, prev, send) => html`
   <div>
     <h3>
     model: ${JSON.stringify(state)}
@@ -47,13 +51,15 @@ var view = (state, prev, send) => html`
 `
 
 // it could be an array also
-var parentApp = chooViewApp.createApp({
+const parentApp = chooViewApp.createApp({
   subAppOne:view,
   subAppTwo:view
 });
 
 parentApp.model({
-  state:{ title:'parentApp' },
+  state:{ 
+    title:'parentApp' 
+  },
   reducers:{
     change(state,data){
       return { title:data }
@@ -61,9 +67,9 @@ parentApp.model({
   }
 });
 
-chooViewApp.mount(parentApp.start(),'.parentApp');
+chooViewApp.mount(parentApp.start(),'#parentApp');
 
 // must start parent app in order to have childs available
-chooViewApp.mount(parentApp.childs.subAppOne.start(),'.childOneApp');
-chooViewApp.mount(parentApp.childs.subAppTwo.start(),'.childTwoApp');
+chooViewApp.mount(parentApp.childs.subAppOne.start(),'#childOneApp');
+chooViewApp.mount(parentApp.childs.subAppTwo.start(),'#childTwoApp');
 ```

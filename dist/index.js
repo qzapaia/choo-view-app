@@ -33,8 +33,7 @@ exports.createApp = function (view) {
     subscriptions: {
       init: function init(send, done) {
         app.send = function (action, data) {
-          var cb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
-          return send(action, data, cb);
+          return send(action, data, done);
         };
 
         if (view instanceof Array) {
@@ -51,7 +50,7 @@ exports.createApp = function (view) {
           app.childs = [];
         }
 
-        app.parentApp && app.parentApp.send('replaceState', {}, function () {});
+        app.parentApp && app.parentApp.send('replaceState', {});
       }
     }
   });

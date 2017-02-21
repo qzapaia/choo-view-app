@@ -1,6 +1,6 @@
 {
   "name": "choo-view-app",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Create choo single-view app (widget). Create choo apps with child apps.",
   "main": "index.js",
   "keywords": [

@@ -37,7 +37,7 @@ After start the app you can use ```app.send``` to call actions.
 
 ```js
 const html = require('choo/html')
-const chooViewApp = require('../src/index');
+const chooViewApp = require('choo-view-app');
 
 const view = (state, prev, send) => html`
   <div>

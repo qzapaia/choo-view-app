@@ -1,41 +1,3 @@
-# choo-view-app
-Create choo single-view app (widget). Create choo apps with child apps.
-
-
-## Single view app
-
-```js
-const html = require('choo/html');
-const chooViewApp = require('choo-view-app');
-
-const view = (state, prev, send) => html`
-  <div>
-    ${state.title}
-    <input oninput=${(e)=>send('change', e.target.value)} />
-  </div>
-`;
-
-const app = chooViewApp.createApp(view);
-
-app.model({
-  state:{
-    title:'view app'
-  },
-  reducers:{
-    change(state, data){
-      return { title:data }
-    }
-  }
-});
-
-chooViewApp.mount(app.start(), '#chooApp');
-```
-
-After start the app you can use ```app.send``` to call actions.
-
-## View App with children
-
-```js
 const html = require('choo/html')
 const chooViewApp = require('../src/index');
 
@@ -45,6 +7,21 @@ const view = (state, prev, send) => html`
     <input oninput=${(e)=>send('change', e.target.value)} />
   </div>
 `
+const app = chooViewApp.createApp(view);
+
+app.model({
+  state:{
+    title:'single view app'
+  },
+  reducers:{
+    change(state, data){
+      return { title:data }
+    }
+  }
+});
+
+chooViewApp.mount(app.start(), '#chooApp');
+
 
 const altView = (state, prev, send) => html`
   <div>
@@ -79,4 +56,3 @@ chooViewApp.mount(parentApp.start(),'#parentApp');
 // must start parent app in order to have chldren available.
 chooViewApp.mount(parentApp.children.subAppOne.start(),'#childOneApp');
 chooViewApp.mount(parentApp.children.subAppTwo.start(),'#childTwoApp');
-```

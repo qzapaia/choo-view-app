@@ -1,59 +1,52 @@
 var choo = require('choo');
 var html = require('choo/html');
 
-exports.createSubApp = (view, parentApp, parentSend) => {
+exports.createSubApp = (view, parentApp) => {
   var subApp = this.createApp((state, prev, send)=>{
-    return view(state, prev, parentSend || send)
+    return view(state, prev, parentApp.send || send)
   });
   subApp.parentApp = parentApp;
   return subApp;
 }
 
-exports.createApp = (view) => {
+const emptyDone = ()=>{}
+
+exports.createApp = (view, childViews = {}) => {
   var that = this;
   var app = choo({href:false});
 
-  app.childs = [];
+  app.children = {};
   app.viewApp = true;
 
   app.model({
     reducers:{
-      replaceState(state,data){
+      chooViewAppReplaceState(state,data='default'){
         return data;
       }
     },
     subscriptions:{
       init(send,done){
-        app.send = (action,data)=>send(action,data,done);
+        app.send = (action,data)=>{ send(action,data,emptyDone) };
 
-        if(view instanceof Array){
-          app.childs = view.map(childView=>that.createSubApp(childView, app, send));
+        Object.keys(childViews).map(k=>{
+          var childView = childViews[k];
+          app.children[k] = that.createSubApp(childViews[k], app, app.send);
+        });
 
-        }else if(typeof view == 'object'){
-          app.childs = {}
-          Object.keys(view).map(k=>{
-            var childView = view[k];
-            app.childs[k] = that.createSubApp(childView, app, send);
-          });
-        }else{
-          app.childs = [];
-        }
-
-        app.parentApp && app.parentApp.send('replaceState',{})
+        app.parentApp && app.parentApp.send('chooViewAppReplaceState',{})
       }
     }
   });
 
   app.router({ default: '/' }, ['/', (state, prev, send)=>{
-    return Object.keys(app.childs).length ? html`<div>model: ${JSON.stringify(state)}</div>`: view(state, prev, send);
+    return view(state, prev, send);
   }]);
 
   app.use({
     onStateChange(s){
-      var subAppsKeys = Object.keys(app.childs);
-      subAppsKeys.forEach(function(subAppsKeys){
-        var subApp = app.childs[subAppsKeys];
-        subApp.send && subApp.send('replaceState',s, ()=>{});
+      Object.keys(app.children).forEach(function(subAppsKeys){
+        var subApp = app.children[subAppsKeys];
+        subApp.send && subApp.send('chooViewAppReplaceState',s);
       })
     }
   })

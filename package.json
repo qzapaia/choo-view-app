@@ -7,7 +7,8 @@
     "choo"
   ],
   "scripts": {
-    "prepublish": "./node_modules/.bin/babel src -d dist && npm version patch"
+    "preversion": "./node_modules/.bin/babel src -d dist ",
+    "pub": "npm version patch && npm publish"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,8 @@
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
-    "babel-preset-es2015": "^6.22.0"
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "webpack": "^2.2.1"
   }
 }

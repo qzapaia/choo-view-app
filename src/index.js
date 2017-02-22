@@ -54,6 +54,8 @@ exports.createApp = (view, childViews = {}) => {
   return app;
 }
 
+exports.group = (childViews)=>this.createApp(()=>html`<div></div>`,childViews);
+
 exports.mount = (appEl, selector) => {
   var current = document.querySelector(selector);
   while(current && current.firstChild){

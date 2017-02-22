@@ -2,7 +2,7 @@
 Create choo single-view app (widget). Create choo apps with child apps.
 
 
-## Single view app
+## Single view-app
 
 ```js
 const html = require('choo/html');
@@ -33,7 +33,44 @@ chooViewApp.mount(app.start(), '#chooApp');
 
 After start the app you can use ```app.send``` to call actions.
 
-## View App with children
+## View-apps group
+
+```js
+const html = require('choo/html')
+const chooViewApp = require('choo-view-app');
+
+const view = (state, prev, send) => html`
+  <div>
+    <h1>${state.title}</h1>
+    <input oninput=${(e)=>send('change', e.target.value)} />
+  </div>
+`
+
+const group = chooViewApp.group({
+  appOne:view,
+  appTwo:view
+});
+
+group.model({
+  state:{
+    title:'group'
+  },
+  reducers:{
+    change(state, data){
+      return { title:data }
+    }
+  }
+});
+
+group.start();
+
+chooViewApp.mount(group.children.appOne.start(),'#appOne');
+chooViewApp.mount(group.children.appTwo.start(),'#appTwo');
+```
+
+
+
+## View-app with children
 
 ```js
 const html = require('choo/html')

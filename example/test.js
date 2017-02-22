@@ -23,6 +23,8 @@ app.model({
 chooViewApp.mount(app.start(), '#chooApp');
 
 
+// example 2 - children
+
 const altView = (state, prev, send) => html`
   <div>
     <h1>${state.title}</h1>
@@ -56,3 +58,27 @@ chooViewApp.mount(parentApp.start(),'#parentApp');
 // must start parent app in order to have chldren available.
 chooViewApp.mount(parentApp.children.subAppOne.start(),'#childOneApp');
 chooViewApp.mount(parentApp.children.subAppTwo.start(),'#childTwoApp');
+
+
+// example 3 - group
+
+const group = chooViewApp.group({
+  appOne:view,
+  appTwo:view
+});
+
+group.model({
+  state:{
+    title:'group'
+  },
+  reducers:{
+    change(state, data){
+      return { title:data }
+    }
+  }
+});
+
+group.start();
+
+chooViewApp.mount(group.children.appOne.start(),'#appOne');
+chooViewApp.mount(group.children.appTwo.start(),'#appTwo');

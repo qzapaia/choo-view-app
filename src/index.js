@@ -24,7 +24,7 @@ exports.createApp = (view) => {
     },
     subscriptions:{
       init(send,done){
-        app.send = (action,data,cb=()=>{})=>send(action,data,cb);
+        app.send = (action,data)=>send(action,data,done);
 
         if(view instanceof Array){
           app.childs = view.map(childView=>that.createSubApp(childView, app, send));
@@ -39,7 +39,7 @@ exports.createApp = (view) => {
           app.childs = [];
         }
 
-        app.parentApp && app.parentApp.send('replaceState',{}, ()=>{})
+        app.parentApp && app.parentApp.send('replaceState',{})
       }
     }
   });

@@ -1,11 +1,14 @@
 {
   "name": "choo-view-app",
-  "version": "0.0.7",
+  "version": "0.0.6",
   "description": "Create choo single-view app (widget). Create choo apps with child apps.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "keywords": [
     "choo"
   ],
+  "scripts": {
+    "prepublish": "./node_modules/.bin/babel src -d dist"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/qzapaia/choo-view-app.git"
@@ -18,5 +21,9 @@
   "homepage": "https://github.com/qzapaia/choo-view-app#readme",
   "peerDependencies": {
     "choo": "4.x"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0"
   }
 }

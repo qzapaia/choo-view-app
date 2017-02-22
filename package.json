@@ -3,12 +3,13 @@
   "version": "0.0.23",
   "description": "Create choo single-view app (widget). Create choo apps with child apps.",
   "main": "dist/index.js",
+  "files": ["dist"],
   "keywords": [
     "choo"
   ],
   "scripts": {
     "preversion": "./node_modules/.bin/babel src -d dist ",
-    "pub": "npm version patch && npm publish"
+    "pub": "npm version patch && npm publish && git push origin master"
   },
   "repository": {
     "type": "git",

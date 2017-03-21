@@ -57,9 +57,15 @@ exports.createApp = (view, childViews = {}) => {
 exports.group = (childViews)=>this.createApp(()=>html`<div></div>`,childViews);
 
 exports.mount = (appEl, selector) => {
-  var current = document.querySelector(selector);
-  while(current && current.firstChild){
-    current.firstChild.remove();
+  const go = () => {
+    var current = document.querySelector(selector);
+    while(current && current.firstChild){
+      current.firstChild.remove();
+    }
+    current && current.appendChild(appEl)
+    console.log('go')
   }
-  current && current.appendChild(appEl)
+
+  (document.readyState === "interactive" || document.readyState === "complete") ?
+    go() : document.addEventListener('DOMContentLoaded', go);
 }

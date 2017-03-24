@@ -1,5 +1,5 @@
 # choo-view-app
-Create choo single-view app (widget). Create choo apps with child apps.
+Create choo single-view app (widget). Create choo apps with child apps. For choo v4.
 
 
 ## Single view-app
